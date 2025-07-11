@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZALIM MODZ | Premium APK Distribution</title>
+    <title>ZALIM MODZ | Multi-User APK Distribution</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -1213,18 +1213,18 @@
         
         <section class="hero">
             <h1>ZALIM MODZ</h1>
-            <h2>Premium APK Distribution - Multi-User System</h2>
+            <h2>Multi-User APK Distribution System</h2>
             
             <div class="floating">
-                <i class="fas fa-sync-alt"></i>
+                <i class="fas fa-cloud-upload-alt"></i>
             </div>
             
             <div class="particles" id="particles"></div>
         </section>
         
         <div class="system-info">
-            <h3><i class="fas fa-server"></i> Multi-User Distribution System</h3>
-            <p>When admin adds/edits APKs, they become available to all users instantly</p>
+            <h3><i class="fas fa-server"></i> Centralized Storage System</h3>
+            <p>Admin changes are saved to centralized storage and visible to all users</p>
             <p>All users see the same APK collection updated in real-time</p>
         </div>
         
@@ -1387,28 +1387,30 @@
     </div>
 
     <footer>
-        <p>© 2025 ZALIM MODZ | Premium APK Distribution Platform</p>
-        <p>Multi-user system with real-time APK distribution</p>
+        <p>© 2025 ZALIM MODZ | Centralized APK Distribution Platform</p>
+        <p>Multi-user system with real-time APK synchronization</p>
     </footer>
 
     <script>
-        // Simulated backend for multi-user functionality
-        class APKBackend {
+        // Centralized storage system using localStorage
+        class CentralStorage {
             constructor() {
                 this.STORAGE_KEY = 'apkProjects';
-                this.PASSWORD = 'karsal112';
-                this.projects = this.loadProjects();
+                this.ADMIN_PASSWORD = 'karsal112';
             }
             
+            // Save projects to centralized storage
+            saveProjects(projects) {
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(projects));
+            }
+            
+            // Load projects from centralized storage
             loadProjects() {
-                const savedProjects = localStorage.getItem(this.STORAGE_KEY);
-                return savedProjects ? JSON.parse(savedProjects) : this.getDefaultProjects();
+                const projects = localStorage.getItem(this.STORAGE_KEY);
+                return projects ? JSON.parse(projects) : this.getDefaultProjects();
             }
             
-            saveProjects() {
-                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.projects));
-            }
-            
+            // Get default projects if storage is empty
             getDefaultProjects() {
                 return [
                     {
@@ -1450,46 +1452,16 @@
                 ];
             }
             
-            addProject(project) {
-                project.id = Date.now();
-                this.projects.push(project);
-                this.saveProjects();
-                return project;
-            }
-            
-            updateProject(projectId, updatedProject) {
-                const index = this.projects.findIndex(p => p.id === projectId);
-                if (index !== -1) {
-                    this.projects[index] = {...this.projects[index], ...updatedProject};
-                    this.saveProjects();
-                    return true;
-                }
-                return false;
-            }
-            
-            deleteProject(projectId) {
-                const index = this.projects.findIndex(p => p.id === projectId);
-                if (index !== -1) {
-                    this.projects.splice(index, 1);
-                    this.saveProjects();
-                    return true;
-                }
-                return false;
-            }
-            
-            getAllProjects() {
-                return this.projects;
-            }
-            
+            // Authenticate admin
             authenticate(password) {
-                return password === this.PASSWORD;
+                return password === this.ADMIN_PASSWORD;
             }
         }
 
         // Main application
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize backend
-            const backend = new APKBackend();
+            // Initialize centralized storage
+            const storage = new CentralStorage();
             
             // Elements
             const menuBtn = document.getElementById('menuBtn');
@@ -1563,7 +1535,7 @@
             
             // Render projects to the grid
             function renderProjects() {
-                const projects = backend.getAllProjects();
+                const projects = storage.loadProjects();
                 apkGrid.innerHTML = '';
                 projectList.innerHTML = '';
                 
@@ -1725,7 +1697,7 @@
             
             // Submit password
             submitPassword.addEventListener('click', function() {
-                if (backend.authenticate(adminPassword.value)) {
+                if (storage.authenticate(adminPassword.value)) {
                     // Correct password
                     loginModal.classList.remove('active');
                     adminPanel.classList.add('show');
@@ -1785,7 +1757,12 @@
                     image: currentImage
                 };
                 
-                backend.addProject(newProject);
+                // Save to centralized storage
+                const projects = storage.loadProjects();
+                newProject.id = Date.now(); // Unique ID
+                projects.push(newProject);
+                storage.saveProjects(projects);
+                
                 renderProjects();
                 
                 // Show notification
@@ -1807,7 +1784,15 @@
                     image: currentImage
                 };
                 
-                if (backend.updateProject(currentEditId, updatedProject)) {
+                // Update in centralized storage
+                const projects = storage.loadProjects();
+                const projectIndex = projects.findIndex(p => p.id === currentEditId);
+                if (projectIndex !== -1) {
+                    projects[projectIndex] = {
+                        ...projects[projectIndex],
+                        ...updatedProject
+                    };
+                    storage.saveProjects(projects);
                     renderProjects();
                     showNotification('Project updated successfully! Visible to all users', true);
                     resetForm();
@@ -1819,7 +1804,8 @@
                 e.stopPropagation();
                 
                 const projectId = parseInt(e.currentTarget.getAttribute('data-id'));
-                const project = backend.getAllProjects().find(p => p.id === projectId);
+                const projects = storage.loadProjects();
+                const project = projects.find(p => p.id === projectId);
                 
                 if (project) {
                     // Populate form
@@ -1866,7 +1852,11 @@
                 const projectId = parseInt(e.currentTarget.getAttribute('data-id'));
                 
                 if (confirm('Are you sure you want to delete this project? It will be removed for all users.')) {
-                    if (backend.deleteProject(projectId)) {
+                    const projects = storage.loadProjects();
+                    const projectIndex = projects.findIndex(p => p.id === projectId);
+                    if (projectIndex !== -1) {
+                        projects.splice(projectIndex, 1);
+                        storage.saveProjects(projects);
                         renderProjects();
                         showNotification('Project deleted successfully! Removed for all users', true);
                         
@@ -1899,7 +1889,8 @@
                 
                 const card = e.currentTarget;
                 const projectId = parseInt(card.getAttribute('data-id'));
-                const project = backend.getAllProjects().find(p => p.id === projectId);
+                const projects = storage.loadProjects();
+                const project = projects.find(p => p.id === projectId);
                 
                 if (!project) return;
                 
@@ -1971,7 +1962,7 @@
                 
                 if (term.length === 0) return;
                 
-                const projects = backend.getAllProjects();
+                const projects = storage.loadProjects();
                 const filtered = projects.filter(project => 
                     project.name.toLowerCase().includes(term) || 
                     project.desc.toLowerCase().includes(term)
@@ -2013,7 +2004,7 @@
             
             // Listen for storage changes to update UI across tabs
             window.addEventListener('storage', function(e) {
-                if (e.key === backend.STORAGE_KEY) {
+                if (e.key === storage.STORAGE_KEY) {
                     renderProjects();
                 }
             });
