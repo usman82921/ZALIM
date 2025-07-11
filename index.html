@@ -3,55 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APK ZALIM | Enhanced Admin Panel</title>
+    <title>ZALIM MODZ | Premium APK Distribution</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --light: #ffffff;
-            --dark: #333333;
-            --darker: #555555;
-            --success: #00b894;
-            --danger: #ff7675;
-            --warning: #fdcb6e;
-            --background: #f5f7fa;
-            --card-bg: #ffffff;
-            --border: #e0e0e0;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        :root {
+            /* Light Theme Variables */
+            --primary: #6c5ce7;
+            --primary-dark: #5d4ddf;
+            --secondary: #a29bfe;
+            --light: #ffffff;
+            --dark: #f5f5f5;
+            --darker: #e0e0e0;
+            --success: #00b894;
+            --danger: #ff7675;
+            --background: #f9f9f9;
+            --card-bg: #ffffff;
+            --border: #e0e0e0;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --glow: 0 0 10px rgba(108, 92, 231, 0.15);
+        }
+        
+        body.dark-theme {
+            /* Dark Theme Variables */
+            --primary: #6c5ce7;
+            --primary-dark: #5d4ddf;
+            --secondary: #a29bfe;
+            --light: #ffffff;
+            --dark: #0f0f0f;
+            --darker: #1a1a1a;
+            --success: #00b894;
+            --danger: #ff7675;
+            --background: #111111;
+            --card-bg: #1a1a1a;
+            --border: #2a2a2a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --glow: 0 0 15px rgba(108, 92, 231, 0.2);
         }
         
         body {
             background: var(--background);
             color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px;
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
+            padding: 15px;
+            transition: background-color 0.3s;
         }
         
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
         
-        /* Header Styles */
+        /* Header Styles - COMPACT */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 0;
-            margin-bottom: 30px;
+            padding: 12px 0;
+            margin-bottom: 20px;
             border-bottom: 1px solid var(--border);
             position: relative;
         }
@@ -59,61 +82,152 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
         
         .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+            font-size: 18px;
+            box-shadow: var(--glow);
             color: white;
+            animation: float 4s ease-in-out infinite;
         }
         
         .logo-text {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 8px rgba(108, 92, 231, 0.1);
+            letter-spacing: 0.5px;
         }
         
-        .secret-btn {
-            width: 50px;
-            height: 50px;
-            background: rgba(108, 92, 231, 0.1);
-            border-radius: 50%;
+        .header-controls {
             display: flex;
             align-items: center;
+            gap: 8px;
+        }
+        
+        .search-btn, .theme-btn, .menu-btn {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background: rgba(108, 92, 231, 0.1);
             cursor: pointer;
             transition: var(--transition);
-            font-size: 20px;
+            border: 1px solid rgba(108, 92, 231, 0.15);
+        }
+        
+        .search-btn:hover, .theme-btn:hover, .menu-btn:hover {
+            background: rgba(108, 92, 231, 0.2);
+        }
+        
+        .search-btn i, .theme-btn i, .menu-btn span {
+            color: var(--primary);
+            font-size: 16px;
+        }
+        
+        .menu-btn span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+            transition: var(--transition);
+            margin: 2px 0;
+        }
+        
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--darker);
+            border-radius: 12px;
+            padding: 10px;
+            width: 200px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 1px solid var(--primary);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            background: rgba(108, 92, 231, 0.05);
+            border: 1px solid rgba(108, 92, 231, 0.1);
+            font-size: 13px;
+        }
+        
+        .dropdown-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .dropdown-item i {
+            font-size: 14px;
+            width: 20px;
+            text-align: center;
             color: var(--primary);
         }
         
-        .secret-btn:hover {
-            background: rgba(108, 92, 231, 0.2);
-            transform: rotate(90deg) scale(1.1);
+        .dropdown-item:hover {
+            background: rgba(108, 92, 231, 0.15);
+            transform: translateX(-3px);
         }
         
-        /* Hero Section */
+        /* Hero Section - COMPACT */
         .hero {
             text-align: center;
-            padding: 40px 20px;
-            margin-bottom: 50px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            padding: 30px 15px;
+            margin-bottom: 25px;
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: 18px;
+            backdrop-filter: blur(5px);
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 2;
         }
         
         .hero::before {
@@ -123,58 +237,66 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(108,92,231,0.05) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(108,92,231,0.08) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
+            font-weight: 800;
         }
         
-        .hero p {
+        .hero h2 {
             font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
+            margin-bottom: 15px;
             color: var(--text-secondary);
+            font-weight: 300;
         }
         
-        /* APK Grid */
+        .floating {
+            font-size: 3rem;
+            margin-top: 20px;
+            opacity: 0.1;
+            color: var(--primary);
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* APK Grid - COMPACT */
         .apk-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
         }
         
         .apk-card {
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             border: 1px solid var(--border);
             transform: translateY(0);
             position: relative;
             cursor: pointer;
+            z-index: 1;
         }
         
         .apk-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border-color: rgba(108, 92, 231, 0.3);
-        }
-        
-        .apk-card:active {
-            transform: scale(0.98);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: rgba(108, 92, 231, 0.35);
         }
         
         .apk-img {
-            height: 220px;
-            background: #f0f5ff;
+            height: 160px;
+            background: var(--darker);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -182,58 +304,57 @@
             position: relative;
         }
         
-        .apk-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .apk-card:hover .apk-img img {
-            transform: scale(1.05);
-        }
-        
         .apk-img .placeholder {
-            font-size: 4rem;
+            font-size: 2.8rem;
             opacity: 0.3;
             color: var(--primary);
         }
         
+        .apk-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
         .apk-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 10px;
+            right: 10px;
             background: var(--primary);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
             font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            z-index: 2;
         }
         
         .apk-content {
-            padding: 25px;
+            padding: 18px;
         }
         
         .apk-content h3 {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            color: var(--dark);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
         }
         
         .apk-content p {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--text-secondary);
-            min-height: 60px;
+            min-height: 45px;
+            font-size: 13px;
+            line-height: 1.6;
         }
         
         .btn {
             display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 14px 30px;
-            border-radius: 15px;
+            padding: 10px 20px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
@@ -241,37 +362,66 @@
             cursor: pointer;
             width: 100%;
             text-align: center;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.2);
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 5px 12px rgba(108, 92, 231, 0.12);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: 0.4s;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            background: #5d4ddf;
-            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
+            background: var(--primary-dark);
+            box-shadow: 0 6px 15px rgba(108, 92, 231, 0.2);
             transform: translateY(-2px);
         }
         
         .btn-download {
             background: var(--success);
-            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.2);
+            box-shadow: 0 5px 12px rgba(0, 184, 148, 0.12);
         }
         
         .btn-download:hover {
             background: #00a885;
-            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 184, 148, 0.2);
         }
         
-        /* Admin Panel */
+        .btn-cancel {
+            background: var(--danger);
+            box-shadow: 0 5px 12px rgba(255, 118, 117, 0.12);
+        }
+        
+        .btn-cancel:hover {
+            background: #ff5e5d;
+            box-shadow: 0 6px 15px rgba(255, 118, 117, 0.2);
+        }
+        
+        /* Admin Panel - COMPACT */
         .admin-panel {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 40px;
-            margin: 50px 0;
+            background: var(--darker);
+            border-radius: 18px;
+            padding: 25px;
+            margin: 30px 0;
             display: none;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
             border: 1px solid rgba(108, 92, 231, 0.2);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
             position: relative;
             overflow: hidden;
             z-index: 100;
@@ -280,11 +430,11 @@
         
         .admin-panel.show {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.4s ease;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -294,369 +444,133 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            height: 4px;
+            background: var(--gradient);
         }
         
         .admin-panel h2 {
             text-align: center;
-            margin-bottom: 40px;
-            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-size: 1.7rem;
             color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
+            font-weight: 700;
         }
         
         .admin-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 20px;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 18px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 600;
             color: var(--primary);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 16px 20px;
-            border-radius: 15px;
-            border: 2px solid var(--border);
-            background: rgba(255,255,255,0.8);
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 13px;
             transition: var(--transition);
         }
         
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
         }
         
         .admin-controls {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 12px;
+            margin-top: 25px;
             grid-column: span 2;
         }
         
         .btn-admin {
             flex: 1;
             background: var(--primary);
+            padding: 12px;
+            font-size: 14px;
         }
         
-        .btn-cancel {
-            background: var(--danger);
-            box-shadow: 0 5px 15px rgba(255, 118, 117, 0.2);
-        }
-        
-        .btn-cancel:hover {
-            background: #ff5e5d;
-            box-shadow: 0 8px 20px rgba(255, 118, 117, 0.3);
-        }
-        
-        /* Download Overlay */
-        .download-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.95);
+        /* Improved Image upload section */
+        .image-upload-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .download-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .download-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border: 1px solid var(--primary);
-            position: relative;
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .download-box h3 {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-        
-        .download-box p {
-            margin-bottom: 25px;
-            color: var(--text-secondary);
-        }
-        
-        .download-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .download-progress {
-            width: 100%;
-            height: 10px;
-            background: rgba(0,0,0,0.05);
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 25px 0;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 0 20px;
-            margin-top: 50px;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .apk-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .download-actions {
-                flex-direction: column;
-            }
-            
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Animation */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .floating {
-            animation: float 4s ease-in-out infinite;
-        }
-        
-        /* Password Modal */
-        .password-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.95);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .password-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border: 1px solid var(--primary);
-            position: relative;
-            animation: popIn 0.4s ease;
-        }
-        
-        .modal-box h3 {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-        
-        .modal-box p {
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-        }
-        
-        .modal-box input {
-            width: 100%;
-            padding: 16px 20px;
-            border-radius: 15px;
-            border: 2px solid var(--border);
-            background: rgba(255,255,255,0.8);
-            color: var(--text-primary);
-            font-size: 1rem;
-            margin-bottom: 20px;
-            transition: var(--transition);
-        }
-        
-        .modal-box input:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
-        }
-        
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .modal-actions .btn {
-            width: auto;
-            padding: 14px 30px;
-        }
-        
-        /* Error message */
-        .error-message {
-            background: var(--danger);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            margin-top: 15px;
-            display: none;
-        }
-        
-        .error-message.show {
-            display: block;
-            animation: shake 0.5s;
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-        
-        /* Status indicators */
-        .update-info {
-            background: rgba(108, 92, 231, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-        
-        .proxy-status {
-            background: rgba(108, 92, 231, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        .status-indicator {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: var(--success);
-            margin-right: 10px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        /* Admin instructions */
-        .admin-instructions {
-            background: rgba(108, 92, 231, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 30px 0;
-            text-align: center;
-            border: 1px dashed var(--primary);
-            color: var(--text-secondary);
-        }
-        
-        /* Admin actions */
-        .admin-actions {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            display: flex;
+            flex-direction: column;
             gap: 10px;
-            z-index: 10;
+            margin-bottom: 18px;
         }
         
-        .admin-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+        .image-preview-container {
+            grid-column: span 2;
+            margin-bottom: 15px;
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--darker);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
+            border: 2px dashed var(--border);
+            position: relative;
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .image-preview .placeholder {
+            color: var(--text-secondary);
+            font-size: 1.8rem;
+            opacity: 0.3;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(108, 92, 231, 0.1);
+            color: var(--primary);
+            border-radius: 8px;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            font-size: 16px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid var(--primary);
+            font-size: 13px;
+            margin: 0 auto;
         }
         
-        .admin-btn.edit {
-            color: var(--primary);
-        }
-        
-        .admin-btn.delete {
-            color: var(--danger);
-        }
-        
-        .admin-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        .upload-btn:hover {
+            background: rgba(108, 92, 231, 0.2);
+            transform: translateY(-2px);
         }
         
         /* Project list */
@@ -666,11 +580,13 @@
         }
         
         .project-list h3 {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--primary);
             text-align: center;
             padding-bottom: 10px;
             border-bottom: 1px solid var(--border);
+            font-size: 1.3rem;
+            font-weight: 600;
         }
         
         .project-list ul {
@@ -678,17 +594,19 @@
             max-height: 300px;
             overflow-y: auto;
             border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 12px;
+            background: var(--darker);
         }
         
         .project-list li {
-            padding: 15px;
+            padding: 12px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: var(--transition);
+            font-size: 13px;
         }
         
         .project-list li:last-child {
@@ -696,22 +614,24 @@
         }
         
         .project-list li:hover {
-            background: rgba(108, 92, 231, 0.05);
-            border-radius: 10px;
+            background: rgba(108, 92, 231, 0.07);
+            border-radius: 8px;
         }
         
         .project-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         
         .project-btn {
-            padding: 8px 15px;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 12px;
             cursor: pointer;
             border: none;
             transition: var(--transition);
+            font-weight: 600;
+            min-width: 70px;
         }
         
         .project-btn.edit {
@@ -726,26 +646,187 @@
         
         .project-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* About Modal */
+        .about-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .about-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .about-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border: 1px solid var(--primary);
+            position: relative;
+            animation: popIn 0.4s ease;
+            z-index: 2001;
+            text-align: center;
+        }
+        
+        .about-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: left;
+        }
+        
+        .about-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        /* Admin Login Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .login-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .login-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border: 1px solid var(--primary);
+            position: relative;
+            animation: popIn 0.4s ease;
+            z-index: 2001;
+            text-align: center;
+        }
+        
+        .login-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--darker);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+        }
+        
+        .error-message {
+            background: var(--danger);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            display: none;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        
+        .error-message.show {
+            display: block;
+            animation: shake 0.4s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .login-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
         }
         
         /* Notification */
         .notification {
             position: fixed;
-            top: 30px;
-            right: 30px;
+            top: 25px;
+            right: 25px;
             background: var(--success);
             color: white;
-            padding: 15px 25px;
+            padding: 14px 20px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
             z-index: 3000;
             opacity: 0;
             transform: translateX(100%);
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
         }
         
         .notification.show {
@@ -754,7 +835,264 @@
         }
         
         .notification i {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-controls {
+                grid-column: span 1;
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+            
+            .apk-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-buttons, .login-buttons {
+                flex-direction: column;
+            }
+            
+            .admin-panel {
+                padding: 20px;
+            }
+            
+            .admin-controls {
+                flex-direction: column;
+            }
+        }
+        
+        /* Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Status indicators */
+        .update-info {
+            background: rgba(108, 92, 231, 0.06);
+            border-radius: 10px;
+            padding: 14px;
+            margin: 18px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            font-weight: 300;
+        }
+        
+        .proxy-status {
+            background: rgba(108, 92, 231, 0.06);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 18px 0;
+            text-align: center;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--success);
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 6px var(--success);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        /* Download Modal */
+        .download-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .download-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .download-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border: 1px solid var(--primary);
+            position: relative;
+            animation: popIn 0.4s ease;
+            z-index: 2001;
+            text-align: center;
+        }
+        
+        .download-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .download-content p {
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        /* Search Overlay */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .search-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .search-container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 2px solid var(--primary);
+            background: var(--darker);
+            color: var(--text-primary);
+            font-size: 16px;
+            outline: none;
+            padding-right: 50px;
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 20px;
+        }
+        
+        .search-results {
+            max-height: 60vh;
+            overflow-y: auto;
+            background: var(--darker);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-item:hover {
+            background: rgba(108, 92, 231, 0.1);
+        }
+        
+        .search-result-item h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .close-search {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-search:hover {
+            color: var(--primary);
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -762,42 +1100,64 @@
     <div class="container">
         <header>
             <div class="logo">
-                <div class="logo-icon floating">
-                    <i class="fas fa-download"></i>
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
                 </div>
-                <div class="logo-text"> 
-            
-                   ZALIM MODZ</div>
+                <div class="logo-text">ZALIM MODZ</div>
             </div>
-            <div class="secret-btn" id="secretBtn">
-                <i class="fas fa-cog"></i>
+            <div class="header-controls">
+                <div class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="theme-btn" id="themeBtn">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="menu-btn" id="menuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu" id="dropdownMenu">
+                <div class="dropdown-item" data-action="admin">
+                    <i class="fas fa-lock"></i> Admin Panel
+                </div>
+                <div class="dropdown-item" data-action="telegram">
+                    <i class="fab fa-telegram"></i> Telegram Channel
+                </div>
+                <div class="dropdown-item" data-action="owner">
+                    <i class="fas fa-user"></i> Contact Owner
+                </div>
+                <div class="dropdown-item" data-action="about">
+                    <i class="fas fa-info-circle"></i> About Us
+                </div>
             </div>
         </header>
         
         <section class="hero">
-            <h1>Reliable APK Distribution</h1>
-            <p>Auto-updating links with guaranteed downloads</p>
-            <div class="floating" style="font-size: 5rem; margin-top: 30px; opacity: 0.1; color: var(--primary);">
-                <i class="fas fa-sync-alt"></i>
+            <h1>ZALIM MODZ</h1>
+            <h2>Premium APK Experience</h2>
+            
+            <div class="floating">
+                <i class="fas fa-download"></i>
             </div>
         </section>
         
         <div class="update-info">
-            <p><i class="fas fa-info-circle"></i> APK links automatically update every 24 hours</p>
+            <p><i class="fas fa-sync-alt"></i> APK links automatically update every 24 hours</p>
             <p><i class="fas fa-mobile-alt"></i> Tap on any APK card to start download</p>
-        </div>
-        
-        <div class="admin-instructions">
-            <p><i class="fas fa-key"></i> Admin access requires authentication - Tap the gear icon</p>
+            <p><i class="fas fa-shield-alt"></i> All downloads are thoroughly scanned for security</p>
         </div>
         
         <div class="proxy-status">
-            <p><span class="status-indicator"></span> Admin panel: <strong>Secured & Functional</strong></p>
-            <p>All admin features are now working properly</p>
+            <p><span class="status-indicator"></span> Admin panel: <strong>Secured & Fully Functional</strong></p>
+            <p>Complete with image upload and project management</p>
         </div>
         
         <div class="apk-grid" id="apkGrid">
-            <!-- APK Cards will be generated here -->
+            <!-- APK Cards will be dynamically loaded -->
         </div>
         
         <!-- Admin Panel -->
@@ -821,6 +1181,18 @@
                     <input type="text" id="apkVersion" placeholder="Enter version number">
                 </div>
                 
+                <!-- Improved Image upload section -->
+                <div class="image-preview-container" style="grid-column: span 2;">
+                    <label><i class="fas fa-image"></i> APK Image Preview</label>
+                    <div class="image-preview" id="imagePreview">
+                        <div class="placeholder"><i class="fas fa-cloud-upload-alt"></i></div>
+                    </div>
+                    <label class="upload-btn">
+                        <i class="fas fa-upload"></i> Choose Image from Gallery
+                        <input type="file" id="apkImage" accept="image/png, image/jpeg" style="display: none;">
+                    </label>
+                </div>
+                
                 <!-- Project list section -->
                 <div class="project-list">
                     <h3><i class="fas fa-list"></i> Manage Projects</h3>
@@ -836,41 +1208,55 @@
             </div>
         </div>
         
-        <!-- Download Overlay -->
-        <div class="download-overlay" id="downloadOverlay">
-            <div class="download-box">
-                <h3><i class="fas fa-download"></i> Download Started</h3>
-                <p>Your download of "<span id="downloadFileName">App Name</span>" is processing...</p>
+        <!-- About Modal -->
+        <div class="about-modal" id="aboutModal">
+            <div class="about-content">
+                <h2><i class="fas fa-info-circle"></i> About ZALIM MODZ</h2>
+                <p>Welcome to the ultimate destination for premium modded APKs. At ZALIM MODZ, we specialize in providing exclusive, high-quality modded applications with enhanced features that are not available in the original versions.</p>
                 
-                <div class="download-progress">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
+                <p>Our team of experts carefully tests and verifies every APK to ensure complete safety and functionality. We pride ourselves on delivering the latest mods with regular updates and dedicated support.</p>
                 
-                <div class="download-actions">
-                    <a href="#" id="directDownloadLink" class="btn btn-download" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Direct Link
+                <p>Join our growing community of over 50,000 satisfied users who trust ZALIM MODZ for all their modded app needs. Experience premium features without limitations!</p>
+                
+                <p>With our advanced admin panel, you can easily manage all your projects, upload images, and keep your content up to date with just a few clicks. Our system is designed to be intuitive and efficient, allowing you to focus on what matters most - providing the best modded apps to your users.</p>
+                
+                <p>Our platform features:</p>
+                <ul style="text-align: left; padding-left: 20px; margin-bottom: 20px;">
+                    <li>Secure admin panel with password protection</li>
+                    <li>Easy project management with edit/delete capabilities</li>
+                    <li>Image upload functionality for app previews</li>
+                    <li>Responsive design that works on all devices</li>
+                    <li>Light and dark theme options</li>
+                </ul>
+                
+                <div class="about-buttons">
+                    <a href="https://t.me/ZALIM_MODZ_OFFICIAL" class="btn" target="_blank">
+                        <i class="fab fa-telegram"></i> Telegram Channel
                     </a>
-                    <button class="btn btn-cancel" id="cancelDownloadBtn">
-                        <i class="fas fa-times"></i> Cancel
+                    <button class="btn btn-cancel" id="closeAboutModal">
+                        <i class="fas fa-times"></i> Close
                     </button>
                 </div>
             </div>
         </div>
         
-        <!-- Password Modal -->
-        <div class="password-modal" id="passwordModal">
-            <div class="modal-box">
-                <h3><i class="fas fa-lock"></i> Admin Authentication</h3>
-                <p>Please enter your credentials to access advanced features</p>
-                
-                <input type="password" id="adminPassword" placeholder="Enter admin password">
+        <!-- Admin Login Modal -->
+        <div class="login-modal" id="loginModal">
+            <div class="login-content">
+                <h2><i class="fas fa-lock"></i> Admin Login</h2>
+                <div class="form-group">
+                    <input type="password" id="adminPassword" placeholder="Enter admin password">
+                </div>
                 <div class="error-message" id="passwordError">
                     <i class="fas fa-exclamation-circle"></i> Incorrect password! Please try again.
                 </div>
-                
-                <div class="modal-actions">
-                    <button class="btn btn-admin" id="submitPassword">Submit</button>
-                    <button class="btn btn-cancel" id="cancelPassword">Cancel</button>
+                <div class="login-buttons">
+                    <button class="btn" id="submitPassword">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="btn btn-cancel" id="closeLoginModal">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
                 </div>
             </div>
         </div>
@@ -880,11 +1266,43 @@
             <i class="fas fa-check-circle"></i>
             <div>APK added successfully!</div>
         </div>
+        
+        <!-- Download Confirmation Modal -->
+        <div class="download-modal" id="downloadModal">
+            <div class="download-content">
+                <h2><i class="fas fa-download"></i> Download Confirmation</h2>
+                <p id="downloadText">Are you sure you want to download this APK?</p>
+                <div class="download-buttons">
+                    <button class="btn btn-download" id="confirmDownload">
+                        <i class="fas fa-download"></i> Download Now
+                    </button>
+                    <button class="btn btn-cancel" id="cancelDownload">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="close-search" id="closeSearch">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search APKs...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="search-results" id="searchResults">
+                    <!-- Search results will appear here -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
-        <p>© 2025 APK ZALIM | Auto-Updating APK Portal</p>
-        <p>Admin panel with project management features</p>
+        <p>© 2025 ZALIM MODZ | Premium APK Distribution Platform</p>
+        <p>Advanced admin panel with project management and image upload</p>
     </footer>
 
     <script>
@@ -893,19 +1311,34 @@
             const SECRET_KEY = "karsal112";
             
             // Elements
-            const secretBtn = document.getElementById('secretBtn');
+            const menuBtn = document.getElementById('menuBtn');
+            const dropdownMenu = document.getElementById('dropdownMenu');
             const adminPanel = document.getElementById('adminPanel');
-            const passwordModal = document.getElementById('passwordModal');
+            const loginModal = document.getElementById('loginModal');
             const adminPassword = document.getElementById('adminPassword');
             const passwordError = document.getElementById('passwordError');
             const submitPassword = document.getElementById('submitPassword');
-            const cancelPassword = document.getElementById('cancelPassword');
+            const closeLoginModal = document.getElementById('closeLoginModal');
             const cancelBtn = document.getElementById('cancelBtn');
             const addApkBtn = document.getElementById('addApkBtn');
             const updateApkBtn = document.getElementById('updateApkBtn');
             const apkGrid = document.getElementById('apkGrid');
             const projectList = document.getElementById('projectList');
             const notification = document.getElementById('notification');
+            const apkImage = document.getElementById('apkImage');
+            const imagePreview = document.getElementById('imagePreview');
+            const aboutModal = document.getElementById('aboutModal');
+            const closeAboutModal = document.getElementById('closeAboutModal');
+            const themeBtn = document.getElementById('themeBtn');
+            const searchBtn = document.getElementById('searchBtn');
+            const searchOverlay = document.getElementById('searchOverlay');
+            const closeSearch = document.getElementById('closeSearch');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const downloadModal = document.getElementById('downloadModal');
+            const downloadText = document.getElementById('downloadText');
+            const confirmDownload = document.getElementById('confirmDownload');
+            const cancelDownload = document.getElementById('cancelDownload');
             
             // Form elements
             const apkName = document.getElementById('apkName');
@@ -913,59 +1346,54 @@
             const apkDesc = document.getElementById('apkDesc');
             const apkVersion = document.getElementById('apkVersion');
             
-            // Download elements
-            const downloadOverlay = document.getElementById('downloadOverlay');
-            const directDownloadLink = document.getElementById('directDownloadLink');
-            const cancelDownloadBtn = document.getElementById('cancelDownloadBtn');
-            const downloadFileName = document.getElementById('downloadFileName');
-            const progressBar = document.getElementById('progressBar');
-            
             // State variables
             let projects = [];
             let currentEditId = null;
-            let isAdminMode = false;
-            
-            // Sample projects
-            const sampleProjects = [
-                {
-                    id: 1,
-                    name: "WhatsApp Plus",
-                    link: "https://example.com/download/whatsapp-plus",
-                    desc: "Enhanced version of WhatsApp with extra features and customization options.",
-                    version: "v5.2.1",
-                    size: "82 MB"
-                },
-                {
-                    id: 2,
-                    name: "Free Fire MAX",
-                    link: "https://example.com/download/freefire-max",
-                    desc: "Enhanced battle royale experience with ultra HD graphics and intense gameplay.",
-                    version: "v3.7.0",
-                    size: "716 MB"
-                },
-                {
-                    id: 3,
-                    name: "YouTube Premium",
-                    link: "https://example.com/download/youtube-premium",
-                    desc: "Ad-free YouTube experience with background playback and premium content.",
-                    version: "v18.45.40",
-                    size: "48 MB"
-                },
-                {
-                    id: 4,
-                    name: "Spotify Premium",
-                    link: "https://example.com/download/spotify-premium",
-                    desc: "Unlimited music streaming without ads, with offline listening capabilities.",
-                    version: "v8.8.92",
-                    size: "67 MB"
-                }
-            ];
+            let currentImage = null;
+            let currentDownloadProject = null;
             
             // Initialize projects
             function initProjects() {
                 // Load from localStorage if available
                 const savedProjects = localStorage.getItem('apkProjects');
-                projects = savedProjects ? JSON.parse(savedProjects) : sampleProjects;
+                projects = savedProjects ? JSON.parse(savedProjects) : [
+                    {
+                        id: 1,
+                        name: "WhatsApp Plus",
+                        link: "https://example.com/download/whatsapp-plus",
+                        desc: "Enhanced version of WhatsApp with extra features and customization options.",
+                        version: "v5.2.1",
+                        size: "82 MB",
+                        image: null
+                    },
+                    {
+                        id: 2,
+                        name: "Free Fire MAX",
+                        link: "https://example.com/download/freefire-max",
+                        desc: "Enhanced battle royale experience with ultra HD graphics and intense gameplay.",
+                        version: "v3.7.0",
+                        size: "716 MB",
+                        image: null
+                    },
+                    {
+                        id: 3,
+                        name: "YouTube Premium",
+                        link: "https://example.com/download/youtube-premium",
+                        desc: "Ad-free YouTube experience with background playback and premium content.",
+                        version: "v18.45.40",
+                        size: "48 MB",
+                        image: null
+                    },
+                    {
+                        id: 4,
+                        name: "Spotify Premium",
+                        link: "https://example.com/download/spotify-premium",
+                        desc: "Unlimited music streaming without ads, with offline listening capabilities.",
+                        version: "v8.8.92",
+                        size: "67 MB",
+                        image: null
+                    }
+                ];
                 
                 renderProjects();
             }
@@ -980,9 +1408,18 @@
                     const card = document.createElement('div');
                     card.className = 'apk-card';
                     card.setAttribute('data-id', project.id);
+                    
+                    let imageContent = `
+                        <div class="placeholder"><i class="fab fa-android"></i></div>
+                    `;
+                    
+                    if (project.image) {
+                        imageContent = `<img src="${project.image}" alt="${project.name}">`;
+                    }
+                    
                     card.innerHTML = `
                         <div class="apk-img">
-                            <div class="placeholder"><i class="fab fa-android"></i></div>
+                            ${imageContent}
                             <div class="apk-badge">${project.version}</div>
                         </div>
                         <div class="apk-content">
@@ -995,7 +1432,7 @@
                     `;
                     
                     // Add admin buttons if in admin mode
-                    if (isAdminMode) {
+                    if (adminPanel.classList.contains('show')) {
                         const adminActions = document.createElement('div');
                         adminActions.className = 'admin-actions';
                         adminActions.innerHTML = `
@@ -1016,7 +1453,7 @@
                     listItem.innerHTML = `
                         <div>
                             <strong>${project.name}</strong>
-                            <div style="font-size: 0.9rem; color: ${isAdminMode ? 'var(--text-secondary)' : 'var(--text-secondary)'}">${project.version}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary)">${project.version}</div>
                         </div>
                         <div class="project-actions">
                             <button class="project-btn edit" data-id="${project.id}">
@@ -1036,7 +1473,7 @@
                 });
                 
                 // Add event listeners to admin buttons
-                if (isAdminMode) {
+                if (adminPanel.classList.contains('show')) {
                     document.querySelectorAll('.admin-btn.edit').forEach(btn => {
                         btn.addEventListener('click', editProjectHandler);
                     });
@@ -1060,10 +1497,70 @@
                 localStorage.setItem('apkProjects', JSON.stringify(projects));
             }
             
-            // Show password modal when secret button is clicked
-            secretBtn.addEventListener('click', function() {
-                passwordModal.classList.add('active');
-                adminPassword.focus();
+            // Toggle menu
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuBtn.classList.toggle('active');
+                dropdownMenu.classList.toggle('show');
+            });
+            
+            // Theme toggle
+            themeBtn.addEventListener('click', function() {
+                document.body.classList.toggle('dark-theme');
+                const isDarkMode = document.body.classList.contains('dark-theme');
+                themeBtn.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                
+                // Save theme preference
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            });
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!menuBtn.contains(e.target)) {
+                    menuBtn.classList.remove('active');
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+            
+            // Handle dropdown menu actions
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    menuBtn.classList.remove('active');
+                    dropdownMenu.classList.remove('show');
+                    
+                    switch(action) {
+                        case 'admin':
+                            loginModal.classList.add('active');
+                            break;
+                        case 'telegram':
+                            window.open('https://t.me/ZALIM_MODZ_OFFICIAL', '_blank');
+                            break;
+                        case 'owner':
+                            window.open('https://t.me/NC_AYAN', '_blank');
+                            break;
+                        case 'about':
+                            aboutModal.classList.add('active');
+                            break;
+                    }
+                });
+            });
+            
+            // Close about modal
+            closeAboutModal.addEventListener('click', function() {
+                aboutModal.classList.remove('active');
+            });
+            
+            // Close login modal
+            closeLoginModal.addEventListener('click', function() {
+                loginModal.classList.remove('active');
                 passwordError.classList.remove('show');
             });
             
@@ -1071,13 +1568,10 @@
             submitPassword.addEventListener('click', function() {
                 if (adminPassword.value === SECRET_KEY) {
                     // Correct password
-                    passwordModal.classList.remove('active');
+                    loginModal.classList.remove('active');
                     adminPanel.classList.add('show');
                     passwordError.classList.remove('show');
                     adminPassword.value = '';
-                    
-                    // Enable admin mode
-                    isAdminMode = true;
                     renderProjects();
                 } else {
                     // Incorrect password
@@ -1087,19 +1581,33 @@
                 }
             });
             
-            // Cancel password entry
-            cancelPassword.addEventListener('click', function() {
-                passwordModal.classList.remove('active');
-                passwordError.classList.remove('show');
-                adminPassword.value = '';
-            });
-            
             // Close admin panel
             cancelBtn.addEventListener('click', function() {
                 adminPanel.classList.remove('show');
-                isAdminMode = false;
-                renderProjects();
                 resetForm();
+                renderProjects();
+            });
+            
+            // Handle image upload - FIXED IMAGE PREVIEW
+            apkImage.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        currentImage = event.target.result;
+                        imagePreview.innerHTML = '';
+                        
+                        const img = document.createElement('img');
+                        img.src = currentImage;
+                        img.alt = "APK Preview";
+                        img.style.maxWidth = "100%";
+                        img.style.maxHeight = "100%";
+                        img.style.objectFit = "contain";
+                        
+                        imagePreview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
             });
             
             // Add new APK
@@ -1115,7 +1623,8 @@
                     link: apkLink.value,
                     desc: apkDesc.value,
                     version: apkVersion.value,
-                    size: "0 MB" // Default size
+                    size: "0 MB", // Default size
+                    image: currentImage
                 };
                 
                 projects.push(newProject);
@@ -1141,7 +1650,8 @@
                     name: apkName.value,
                     link: apkLink.value,
                     desc: apkDesc.value,
-                    version: apkVersion.value
+                    version: apkVersion.value,
+                    image: currentImage || projects[projectIndex].image
                 };
                 
                 saveProjects();
@@ -1170,6 +1680,25 @@
                     
                     // Set current edit ID
                     currentEditId = project.id;
+                    
+                    // Set current image
+                    currentImage = project.image;
+                    
+                    // Update image preview
+                    if (project.image) {
+                        imagePreview.innerHTML = '';
+                        
+                        const img = document.createElement('img');
+                        img.src = project.image;
+                        img.alt = "APK Preview";
+                        img.style.maxWidth = "100%";
+                        img.style.maxHeight = "100%";
+                        img.style.objectFit = "contain";
+                        
+                        imagePreview.appendChild(img);
+                    } else {
+                        imagePreview.innerHTML = '<div class="placeholder"><i class="fas fa-cloud-upload-alt"></i></div>';
+                    }
                     
                     // Show update button
                     addApkBtn.style.display = 'none';
@@ -1206,11 +1735,14 @@
                 apkDesc.value = '';
                 apkVersion.value = '';
                 currentEditId = null;
+                currentImage = null;
+                apkImage.value = '';
+                imagePreview.innerHTML = '<div class="placeholder"><i class="fas fa-cloud-upload-alt"></i></div>';
                 addApkBtn.style.display = 'block';
                 updateApkBtn.style.display = 'none';
             }
             
-            // APK card click handler
+            // APK card click handler - FIXED DOWNLOAD FUNCTIONALITY
             function apkCardClickHandler(e) {
                 // Skip if user clicked on admin buttons
                 if (e.target.closest('.admin-btn')) return;
@@ -1221,47 +1753,41 @@
                 
                 if (!project) return;
                 
-                // Update overlay content
-                downloadFileName.textContent = project.name;
-                directDownloadLink.href = project.link;
+                // Set current download project
+                currentDownloadProject = project;
                 
-                // Show overlay
-                downloadOverlay.classList.add('active');
-                
-                // Simulate download progress
-                simulateDownloadProgress();
+                // Show download confirmation modal
+                downloadText.textContent = `Are you sure you want to download ${project.name} (${project.version})?`;
+                downloadModal.classList.add('active');
             }
             
-            // Cancel download button
-            cancelDownloadBtn.addEventListener('click', function() {
-                downloadOverlay.classList.remove('active');
-                progressBar.style.width = '0%';
+            // Confirm download
+            confirmDownload.addEventListener('click', function() {
+                if (!currentDownloadProject) return;
+                
+                // Create a temporary link to start download
+                const a = document.createElement('a');
+                a.href = currentDownloadProject.link;
+                a.download = currentDownloadProject.name + '.apk';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                // Close modal
+                downloadModal.classList.remove('active');
+                
+                // Show notification
+                showNotification(`Downloading ${currentDownloadProject.name}...`, true);
+                
+                // Reset
+                currentDownloadProject = null;
             });
             
-            // Close overlay when clicking outside
-            downloadOverlay.addEventListener('click', function(e) {
-                if (e.target === downloadOverlay) {
-                    downloadOverlay.classList.remove('active');
-                    progressBar.style.width = '0%';
-                }
+            // Cancel download
+            cancelDownload.addEventListener('click', function() {
+                downloadModal.classList.remove('active');
+                currentDownloadProject = null;
             });
-            
-            // Simulate download progress animation
-            function simulateDownloadProgress() {
-                let width = 0;
-                const interval = setInterval(() => {
-                    if (width >= 100) {
-                        clearInterval(interval);
-                        // Automatically start download after progress completes
-                        setTimeout(() => {
-                            window.open(directDownloadLink.href, '_blank');
-                        }, 500);
-                    } else {
-                        width++;
-                        progressBar.style.width = width + '%';
-                    }
-                }, 20);
-            }
             
             // Show notification
             function showNotification(message, isSuccess) {
@@ -1276,6 +1802,59 @@
                     notification.classList.remove('show');
                 }, 3000);
             }
+            
+            // Search functionality
+            searchBtn.addEventListener('click', function() {
+                searchOverlay.classList.add('active');
+                searchInput.focus();
+            });
+            
+            closeSearch.addEventListener('click', function() {
+                searchOverlay.classList.remove('active');
+                searchInput.value = '';
+                searchResults.innerHTML = '';
+            });
+            
+            searchInput.addEventListener('input', function() {
+                const term = this.value.trim().toLowerCase();
+                searchResults.innerHTML = '';
+                
+                if (term.length === 0) return;
+                
+                const filtered = projects.filter(project => 
+                    project.name.toLowerCase().includes(term) || 
+                    project.desc.toLowerCase().includes(term)
+                );
+                
+                if (filtered.length === 0) {
+                    searchResults.innerHTML = '<div class="search-result-item"><p>No APKs found matching your search</p></div>';
+                    return;
+                }
+                
+                filtered.forEach(project => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    resultItem.innerHTML = `
+                        <h4>${project.name}</h4>
+                        <p>${project.desc}</p>
+                        <div style="margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary)">
+                            Version: ${project.version} | Size: ${project.size}
+                        </div>
+                    `;
+                    resultItem.addEventListener('click', function() {
+                        const card = document.querySelector(`.apk-card[data-id="${project.id}"]`);
+                        if (card) {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            card.classList.add('highlight');
+                            setTimeout(() => card.classList.remove('highlight'), 2000);
+                        }
+                        searchOverlay.classList.remove('active');
+                        searchInput.value = '';
+                        searchResults.innerHTML = '';
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+            });
             
             // Initialize the app
             initProjects();
