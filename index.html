@@ -10,33 +10,13 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         :root {
-            /* Light Theme Variables */
             --primary: #6c5ce7;
-            --primary-dark: #5d4ddf;
-            --secondary: #a29bfe;
-            --light: #ffffff;
-            --dark: #f5f5f5;
-            --darker: #e0e0e0;
-            --success: #00b894;
-            --danger: #ff7675;
-            --background: #f9f9f9;
-            --card-bg: #ffffff;
-            --border: #e0e0e0;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-            --glow: 0 0 10px rgba(108, 92, 231, 0.15);
-        }
-        
-        body.dark-theme {
-            /* Dark Theme Variables */
-            --primary: #6c5ce7;
+            --primary-light: #7d6ef0;
             --primary-dark: #5d4ddf;
             --secondary: #a29bfe;
             --light: #ffffff;
@@ -44,22 +24,29 @@
             --darker: #1a1a1a;
             --success: #00b894;
             --danger: #ff7675;
+            --warning: #fdcb6e;
             --background: #111111;
             --card-bg: #1a1a1a;
             --border: #2a2a2a;
             --text-primary: #f0f0f0;
             --text-secondary: #a0a0a0;
-            --glow: 0 0 15px rgba(108, 92, 231, 0.2);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --glow: 0 0 15px rgba(108, 92, 231, 0.3);
+            --card-glow: 0 0 20px rgba(108, 92, 231, 0.2);
+            --btn-glow: 0 0 12px rgba(108, 92, 231, 0.35);
         }
         
         body {
             background: var(--background);
             color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: hidden;
             padding: 15px;
-            transition: background-color 0.3s;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(162, 155, 254, 0.05) 0%, transparent 20%);
+            background-attachment: fixed;
         }
         
         .container {
@@ -68,82 +55,99 @@
             padding: 0 15px;
         }
         
-        /* Header Styles - COMPACT */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            margin-bottom: 25px;
             position: relative;
+            z-index: 10;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            position: relative;
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: var(--gradient);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             box-shadow: var(--glow);
             color: white;
             animation: float 4s ease-in-out infinite;
+            z-index: 2;
         }
         
         .logo-text {
-            font-size: 20px;
-            font-weight: 700;
-            background: var(--gradient);
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 8px rgba(108, 92, 231, 0.1);
+            text-shadow: 0 3px 10px rgba(108, 92, 231, 0.15);
             letter-spacing: 0.5px;
+            position: relative;
+        }
+        
+        .logo-text::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+            box-shadow: var(--glow);
         }
         
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         .search-btn, .theme-btn, .menu-btn {
             position: relative;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
-            background: rgba(108, 92, 231, 0.1);
+            border-radius: 12px;
+            background: rgba(108, 92, 231, 0.15);
             cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid rgba(108, 92, 231, 0.15);
+            border: 1px solid rgba(108, 92, 231, 0.25);
+            box-shadow: var(--glow);
+            z-index: 2;
         }
         
         .search-btn:hover, .theme-btn:hover, .menu-btn:hover {
-            background: rgba(108, 92, 231, 0.2);
+            background: rgba(108, 92, 231, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
         }
         
         .search-btn i, .theme-btn i, .menu-btn span {
-            color: var(--primary);
-            font-size: 16px;
+            color: var(--primary-light);
+            font-size: 18px;
         }
         
         .menu-btn span {
             display: block;
-            width: 18px;
+            width: 20px;
             height: 2px;
-            background: var(--primary);
+            background: var(--primary-light);
             border-radius: 1px;
             transition: var(--transition);
             margin: 2px 0;
@@ -166,16 +170,16 @@
             top: 100%;
             right: 0;
             background: var(--darker);
-            border-radius: 12px;
-            padding: 10px;
-            width: 200px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-radius: 15px;
+            padding: 12px;
+            width: 220px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3), var(--glow);
             border: 1px solid var(--primary);
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(8px);
-            transition: all 0.3s ease;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
         }
         
         .dropdown-menu.show {
@@ -185,18 +189,19 @@
         }
         
         .dropdown-item {
-            padding: 10px 12px;
-            border-radius: 8px;
+            padding: 12px 15px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             transition: var(--transition);
             font-weight: 500;
             color: var(--text-primary);
-            margin-bottom: 5px;
-            background: rgba(108, 92, 231, 0.05);
-            border: 1px solid rgba(108, 92, 231, 0.1);
-            font-size: 13px;
+            margin-bottom: 6px;
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px solid rgba(108, 92, 231, 0.15);
+            font-size: 14px;
+            backdrop-filter: blur(5px);
         }
         
         .dropdown-item:last-child {
@@ -204,29 +209,29 @@
         }
         
         .dropdown-item i {
-            font-size: 14px;
-            width: 20px;
+            font-size: 16px;
+            width: 24px;
             text-align: center;
-            color: var(--primary);
+            color: var(--primary-light);
         }
         
         .dropdown-item:hover {
-            background: rgba(108, 92, 231, 0.15);
-            transform: translateX(-3px);
+            background: rgba(108, 92, 231, 0.2);
+            transform: translateX(-5px);
+            box-shadow: var(--glow);
         }
         
-        /* Hero Section - COMPACT */
         .hero {
             text-align: center;
-            padding: 30px 15px;
-            margin-bottom: 25px;
-            background: rgba(108, 92, 231, 0.05);
-            border-radius: 18px;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--border);
+            padding: 50px 20px;
+            margin-bottom: 35px;
+            background: rgba(108, 92, 231, 0.08);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(108, 92, 231, 0.3);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3), var(--glow);
             z-index: 2;
         }
         
@@ -237,75 +242,118 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(108,92,231,0.08) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(108,92,231,0.1) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
         }
         
         .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
             letter-spacing: 0.5px;
-            font-weight: 800;
+            font-weight: 900;
+            position: relative;
+            z-index: 2;
         }
         
         .hero h2 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
             color: var(--text-secondary);
             font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
         }
         
         .floating {
-            font-size: 3rem;
-            margin-top: 20px;
+            font-size: 3.5rem;
+            margin-top: 30px;
             opacity: 0.1;
-            color: var(--primary);
+            color: var(--primary-light);
             animation: float 4s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
         }
         
-        /* APK Grid - COMPACT */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(108, 92, 231, 0.3);
+            animation: float 15s infinite linear;
+        }
+        
         .apk-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
-            margin: 35px 0;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
         }
         
         .apk-card {
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
             transition: var(--transition);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(108, 92, 231, 0.2);
             transform: translateY(0);
             position: relative;
             cursor: pointer;
             z-index: 1;
         }
         
+        .apk-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+        
         .apk-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-            border-color: rgba(108, 92, 231, 0.35);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), var(--card-glow);
+            border-color: rgba(108, 92, 231, 0.5);
+        }
+        
+        .apk-card:hover::before {
+            opacity: 0.1;
         }
         
         .apk-img {
-            height: 160px;
+            height: 180px;
             background: var(--darker);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             position: relative;
+            border-bottom: 1px solid rgba(108, 92, 231, 0.2);
         }
         
         .apk-img .placeholder {
-            font-size: 2.8rem;
+            font-size: 3rem;
             opacity: 0.3;
             color: var(--primary);
         }
@@ -313,58 +361,70 @@
         .apk-img img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .apk-card:hover .apk-img img {
+            transform: scale(1.05);
         }
         
         .apk-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 12px;
+            right: 12px;
             background: var(--primary);
             color: white;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             z-index: 2;
         }
         
         .apk-content {
-            padding: 18px;
+            padding: 20px;
         }
         
         .apk-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
             color: var(--text-primary);
-            font-weight: 600;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .apk-content h3 i {
+            color: var(--primary-light);
         }
         
         .apk-content p {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--text-secondary);
-            min-height: 45px;
-            font-size: 13px;
-            line-height: 1.6;
+            min-height: 50px;
+            font-size: 14px;
+            line-height: 1.7;
         }
         
         .btn {
             display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 12px 25px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: none;
             cursor: pointer;
             width: 100%;
             text-align: center;
-            font-size: 13px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 5px 12px rgba(108, 92, 231, 0.12);
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            box-shadow: var(--btn-glow);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -377,8 +437,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            transition: 0.4s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.6s;
             z-index: -1;
         }
         
@@ -387,41 +447,40 @@
         }
         
         .btn:hover {
-            background: var(--primary-dark);
-            box-shadow: 0 6px 15px rgba(108, 92, 231, 0.2);
-            transform: translateY(-2px);
+            background: var(--primary-light);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+            transform: translateY(-3px);
         }
         
         .btn-download {
             background: var(--success);
-            box-shadow: 0 5px 12px rgba(0, 184, 148, 0.12);
+            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.25);
         }
         
         .btn-download:hover {
             background: #00a885;
-            box-shadow: 0 6px 15px rgba(0, 184, 148, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.35);
         }
         
         .btn-cancel {
             background: var(--danger);
-            box-shadow: 0 5px 12px rgba(255, 118, 117, 0.12);
+            box-shadow: 0 5px 15px rgba(255, 118, 117, 0.25);
         }
         
         .btn-cancel:hover {
             background: #ff5e5d;
-            box-shadow: 0 6px 15px rgba(255, 118, 117, 0.2);
+            box-shadow: 0 8px 20px rgba(255, 118, 117, 0.35);
         }
         
-        /* Admin Panel - COMPACT */
         .admin-panel {
             background: var(--darker);
-            border-radius: 18px;
-            padding: 25px;
-            margin: 30px 0;
+            border-radius: 25px;
+            padding: 30px;
+            margin: 35px 0;
             display: none;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-            border: 1px solid rgba(108, 92, 231, 0.2);
-            backdrop-filter: blur(5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3), var(--glow);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
             z-index: 100;
@@ -430,11 +489,11 @@
         
         .admin-panel.show {
             display: block;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.5s ease;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -444,91 +503,90 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 5px;
             background: var(--gradient);
         }
         
         .admin-panel h2 {
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.7rem;
-            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 1.9rem;
+            color: var(--primary-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            font-weight: 700;
+            gap: 15px;
+            font-weight: 800;
         }
         
         .admin-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 25px;
         }
         
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--primary-light);
+            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 12px 15px;
-            border-radius: 12px;
+            padding: 14px 18px;
+            border-radius: 15px;
             border: 1px solid var(--border);
-            background: var(--card-bg);
+            background: rgba(30, 30, 30, 0.8);
             color: var(--text-primary);
-            font-size: 13px;
+            font-size: 14px;
             transition: var(--transition);
         }
         
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
         }
         
         .admin-controls {
             display: flex;
-            gap: 12px;
-            margin-top: 25px;
+            gap: 15px;
+            margin-top: 30px;
             grid-column: span 2;
         }
         
         .btn-admin {
             flex: 1;
             background: var(--primary);
-            padding: 12px;
-            font-size: 14px;
+            padding: 14px;
+            font-size: 16px;
         }
         
-        /* Improved Image upload section */
         .image-upload-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 18px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
         
         .image-preview-container {
             grid-column: span 2;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .image-preview {
             width: 100%;
-            height: 250px;
-            border-radius: 12px;
+            height: 280px;
+            border-radius: 15px;
             overflow: hidden;
             background: var(--darker);
             display: flex;
@@ -549,64 +607,64 @@
         
         .image-preview .placeholder {
             color: var(--text-secondary);
-            font-size: 1.8rem;
+            font-size: 2rem;
             opacity: 0.3;
         }
         
         .upload-btn {
             display: inline-block;
-            padding: 8px 16px;
-            background: rgba(108, 92, 231, 0.1);
-            color: var(--primary);
-            border-radius: 8px;
+            padding: 10px 20px;
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--primary-light);
+            border-radius: 10px;
             cursor: pointer;
             transition: var(--transition);
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             border: 1px solid var(--primary);
-            font-size: 13px;
+            font-size: 14px;
             margin: 0 auto;
         }
         
         .upload-btn:hover {
-            background: rgba(108, 92, 231, 0.2);
-            transform: translateY(-2px);
+            background: rgba(108, 92, 231, 0.25);
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
         }
         
-        /* Project list */
         .project-list {
             grid-column: span 2;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         
         .project-list h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
+            margin-bottom: 18px;
+            color: var(--primary-light);
             text-align: center;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 700;
         }
         
         .project-list ul {
             list-style: none;
-            max-height: 300px;
+            max-height: 320px;
             overflow-y: auto;
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            background: var(--darker);
+            border-radius: 15px;
+            padding: 15px;
+            background: rgba(30, 30, 30, 0.8);
         }
         
         .project-list li {
-            padding: 12px;
+            padding: 14px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: var(--transition);
-            font-size: 13px;
+            font-size: 14px;
         }
         
         .project-list li:last-child {
@@ -614,56 +672,73 @@
         }
         
         .project-list li:hover {
-            background: rgba(108, 92, 231, 0.07);
-            border-radius: 8px;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 10px;
+            box-shadow: var(--glow);
         }
         
         .project-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
         
         .project-btn {
-            padding: 7px 12px;
-            border-radius: 8px;
-            font-size: 12px;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 13px;
             cursor: pointer;
             border: none;
             transition: var(--transition);
-            font-weight: 600;
-            min-width: 70px;
+            font-weight: 700;
+            min-width: 80px;
         }
         
         .project-btn.edit {
-            background: rgba(108, 92, 231, 0.1);
-            color: var(--primary);
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--primary-light);
         }
         
         .project-btn.delete {
-            background: rgba(255, 118, 117, 0.1);
+            background: rgba(255, 118, 117, 0.15);
             color: var(--danger);
         }
         
         .project-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
-        /* About Modal */
+        .admin-note {
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 12px;
+            border: 1px solid var(--primary);
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: center;
+            grid-column: span 2;
+        }
+        
+        .admin-note i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+        
         .about-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 15, 15, 0.95);
+            background: rgba(15, 15, 15, 0.97);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .about-modal.active {
@@ -673,60 +748,59 @@
         
         .about-content {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 700px;
+            border-radius: 25px;
+            padding: 35px;
+            max-width: 750px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4), var(--glow);
             border: 1px solid var(--primary);
             position: relative;
-            animation: popIn 0.4s ease;
+            animation: popIn 0.5s ease;
             z-index: 2001;
             text-align: center;
         }
         
         .about-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--primary-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .about-content p {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            line-height: 1.8;
             text-align: left;
         }
         
         .about-buttons {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 25px;
         }
         
-        /* Admin Login Modal */
         .login-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 15, 15, 0.95);
+            background: rgba(15, 15, 15, 0.97);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .login-modal.active {
@@ -736,97 +810,97 @@
         
         .login-content {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 400px;
+            border-radius: 25px;
+            padding: 35px;
+            max-width: 450px;
             width: 90%;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4), var(--glow);
             border: 1px solid var(--primary);
             position: relative;
-            animation: popIn 0.4s ease;
+            animation: popIn 0.5s ease;
             z-index: 2001;
             text-align: center;
         }
         
         .login-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--primary-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         
         .form-group input {
             width: 100%;
-            padding: 12px 15px;
-            border-radius: 12px;
+            padding: 14px 18px;
+            border-radius: 15px;
             border: 1px solid var(--border);
-            background: var(--darker);
+            background: rgba(30, 30, 30, 0.8);
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: 16px;
             transition: var(--transition);
         }
         
         .form-group input:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
         }
         
         .error-message {
             background: var(--danger);
             color: white;
-            padding: 10px 16px;
-            border-radius: 8px;
-            margin-top: 12px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            margin-top: 15px;
             display: none;
-            font-weight: 500;
-            font-size: 13px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(255, 118, 117, 0.25);
         }
         
         .error-message.show {
             display: block;
-            animation: shake 0.4s;
+            animation: shake 0.5s;
         }
         
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
         }
         
         .login-buttons {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 25px;
         }
         
-        /* Notification */
         .notification {
             position: fixed;
-            top: 25px;
-            right: 25px;
+            top: 30px;
+            right: 30px;
             background: var(--success);
             color: white;
-            padding: 14px 20px;
-            border-radius: 10px;
+            padding: 16px 24px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            gap: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
             z-index: 3000;
             opacity: 0;
             transform: translateX(100%);
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
+            transition: all 0.4s ease;
+            font-size: 15px;
+            font-weight: 600;
         }
         
         .notification.show {
@@ -835,124 +909,46 @@
         }
         
         .notification i {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
-        /* Footer */
         footer {
             text-align: center;
-            padding: 30px 0 20px;
-            margin-top: 40px;
+            padding: 35px 0 25px;
+            margin-top: 50px;
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            position: relative;
         }
         
-        /* Responsive */
-        @media (max-width: 992px) {
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .admin-controls {
-                grid-column: span 1;
-                flex-direction: column;
-            }
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+            box-shadow: var(--glow);
         }
         
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero h2 {
-                font-size: 1.2rem;
-            }
-            
-            .apk-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-buttons, .login-buttons {
-                flex-direction: column;
-            }
-            
-            .admin-panel {
-                padding: 20px;
-            }
-            
-            .admin-controls {
-                flex-direction: column;
-            }
-        }
-        
-        /* Animation */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        @keyframes popIn {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        /* Status indicators */
-        .update-info {
-            background: rgba(108, 92, 231, 0.06);
-            border-radius: 10px;
-            padding: 14px;
-            margin: 18px 0;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            font-weight: 300;
-        }
-        
-        .proxy-status {
-            background: rgba(108, 92, 231, 0.06);
-            border-radius: 12px;
-            padding: 16px;
-            margin: 18px 0;
-            text-align: center;
-            border: 1px solid var(--border);
-            font-size: 0.85rem;
-        }
-        
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--success);
-            margin-right: 8px;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 6px var(--success);
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
-        }
-        
-        /* Download Modal */
         .download-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .download-modal.active {
@@ -962,56 +958,55 @@
         
         .download-content {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 450px;
+            border-radius: 25px;
+            padding: 35px;
+            max-width: 500px;
             width: 90%;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4), var(--glow);
             border: 1px solid var(--primary);
             position: relative;
-            animation: popIn 0.4s ease;
+            animation: popIn 0.5s ease;
             z-index: 2001;
             text-align: center;
         }
         
         .download-content h2 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .download-content p {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
         
         .download-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 18px;
         }
         
-        /* Search Overlay */
         .search-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1500;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .search-overlay.active {
@@ -1021,50 +1016,52 @@
         
         .search-container {
             width: 90%;
-            max-width: 600px;
-            padding: 20px;
+            max-width: 700px;
+            padding: 25px;
         }
         
         .search-box {
             position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
         
         .search-box input {
             width: 100%;
-            padding: 15px 20px;
-            border-radius: 50px;
+            padding: 18px 25px;
+            border-radius: 60px;
             border: 2px solid var(--primary);
             background: var(--darker);
             color: var(--text-primary);
-            font-size: 16px;
+            font-size: 18px;
             outline: none;
-            padding-right: 50px;
+            padding-right: 60px;
+            box-shadow: var(--glow);
         }
         
         .search-box i {
             position: absolute;
-            right: 20px;
+            right: 25px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary);
-            font-size: 20px;
+            font-size: 24px;
         }
         
         .search-results {
-            max-height: 60vh;
+            max-height: 65vh;
             overflow-y: auto;
             background: var(--darker);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
         
         .search-result-item {
-            padding: 15px;
+            padding: 18px;
             border-bottom: 1px solid var(--border);
             transition: var(--transition);
             cursor: pointer;
+            border-radius: 12px;
         }
         
         .search-result-item:last-child {
@@ -1072,27 +1069,105 @@
         }
         
         .search-result-item:hover {
-            background: rgba(108, 92, 231, 0.1);
+            background: rgba(108, 92, 231, 0.15);
+            box-shadow: var(--glow);
         }
         
         .search-result-item h4 {
-            color: var(--primary);
-            margin-bottom: 5px;
+            color: var(--primary-light);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
         }
         
         .close-search {
             position: absolute;
-            top: 30px;
-            right: 30px;
+            top: 35px;
+            right: 35px;
             color: white;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
             transition: var(--transition);
         }
         
         .close-search:hover {
             color: var(--primary);
-            transform: scale(1.1);
+            transform: scale(1.2);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .update-info {
+            background: rgba(108, 92, 231, 0.08);
+            border-radius: 15px;
+            padding: 18px;
+            margin: 22px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            font-weight: 300;
+            box-shadow: var(--glow);
+        }
+        
+        .proxy-status {
+            background: rgba(108, 92, 231, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 22px 0;
+            text-align: center;
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+            box-shadow: var(--glow);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--success);
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 8px var(--success);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .system-info {
+            background: rgba(108, 92, 231, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+            border: 1px solid var(--primary);
+            box-shadow: var(--glow);
+        }
+        
+        .system-info h3 {
+            margin-bottom: 15px;
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .system-info p {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
         }
     </style>
 </head>
@@ -1138,16 +1213,24 @@
         
         <section class="hero">
             <h1>ZALIM MODZ</h1>
-            <h2>Premium APK Experience</h2>
+            <h2>Premium APK Distribution - Multi-User System</h2>
             
             <div class="floating">
-                <i class="fas fa-download"></i>
+                <i class="fas fa-sync-alt"></i>
             </div>
+            
+            <div class="particles" id="particles"></div>
         </section>
+        
+        <div class="system-info">
+            <h3><i class="fas fa-server"></i> Multi-User Distribution System</h3>
+            <p>When admin adds/edits APKs, they become available to all users instantly</p>
+            <p>All users see the same APK collection updated in real-time</p>
+        </div>
         
         <div class="update-info">
             <p><i class="fas fa-sync-alt"></i> APK links automatically update every 24 hours</p>
-            <p><i class="fas fa-mobile-alt"></i> Tap on any APK card to start download</p>
+            <p><i class="fas fa-mobile-alt"></i> Tap on any APK card to download</p>
             <p><i class="fas fa-shield-alt"></i> All downloads are thoroughly scanned for security</p>
         </div>
         
@@ -1206,6 +1289,9 @@
                 <button class="btn btn-admin" id="updateApkBtn" style="display: none;"><i class="fas fa-sync-alt"></i> Update Project</button>
                 <button class="btn btn-cancel" id="cancelBtn"><i class="fas fa-times"></i> Close Panel</button>
             </div>
+            <div class="admin-note">
+                <i class="fas fa-info-circle"></i> Note: Changes made here will be visible to all users immediately
+            </div>
         </div>
         
         <!-- About Modal -->
@@ -1223,10 +1309,10 @@
                 <p>Our platform features:</p>
                 <ul style="text-align: left; padding-left: 20px; margin-bottom: 20px;">
                     <li>Secure admin panel with password protection</li>
+                    <li>Real-time updates for all users</li>
                     <li>Easy project management with edit/delete capabilities</li>
                     <li>Image upload functionality for app previews</li>
                     <li>Responsive design that works on all devices</li>
-                    <li>Light and dark theme options</li>
                 </ul>
                 
                 <div class="about-buttons">
@@ -1302,61 +1388,29 @@
 
     <footer>
         <p>© 2025 ZALIM MODZ | Premium APK Distribution Platform</p>
-        <p>Advanced admin panel with project management and image upload</p>
+        <p>Multi-user system with real-time APK distribution</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Secret access key
-            const SECRET_KEY = "karsal112";
+        // Simulated backend for multi-user functionality
+        class APKBackend {
+            constructor() {
+                this.STORAGE_KEY = 'apkProjects';
+                this.PASSWORD = 'karsal112';
+                this.projects = this.loadProjects();
+            }
             
-            // Elements
-            const menuBtn = document.getElementById('menuBtn');
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            const adminPanel = document.getElementById('adminPanel');
-            const loginModal = document.getElementById('loginModal');
-            const adminPassword = document.getElementById('adminPassword');
-            const passwordError = document.getElementById('passwordError');
-            const submitPassword = document.getElementById('submitPassword');
-            const closeLoginModal = document.getElementById('closeLoginModal');
-            const cancelBtn = document.getElementById('cancelBtn');
-            const addApkBtn = document.getElementById('addApkBtn');
-            const updateApkBtn = document.getElementById('updateApkBtn');
-            const apkGrid = document.getElementById('apkGrid');
-            const projectList = document.getElementById('projectList');
-            const notification = document.getElementById('notification');
-            const apkImage = document.getElementById('apkImage');
-            const imagePreview = document.getElementById('imagePreview');
-            const aboutModal = document.getElementById('aboutModal');
-            const closeAboutModal = document.getElementById('closeAboutModal');
-            const themeBtn = document.getElementById('themeBtn');
-            const searchBtn = document.getElementById('searchBtn');
-            const searchOverlay = document.getElementById('searchOverlay');
-            const closeSearch = document.getElementById('closeSearch');
-            const searchInput = document.getElementById('searchInput');
-            const searchResults = document.getElementById('searchResults');
-            const downloadModal = document.getElementById('downloadModal');
-            const downloadText = document.getElementById('downloadText');
-            const confirmDownload = document.getElementById('confirmDownload');
-            const cancelDownload = document.getElementById('cancelDownload');
+            loadProjects() {
+                const savedProjects = localStorage.getItem(this.STORAGE_KEY);
+                return savedProjects ? JSON.parse(savedProjects) : this.getDefaultProjects();
+            }
             
-            // Form elements
-            const apkName = document.getElementById('apkName');
-            const apkLink = document.getElementById('apkLink');
-            const apkDesc = document.getElementById('apkDesc');
-            const apkVersion = document.getElementById('apkVersion');
+            saveProjects() {
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.projects));
+            }
             
-            // State variables
-            let projects = [];
-            let currentEditId = null;
-            let currentImage = null;
-            let currentDownloadProject = null;
-            
-            // Initialize projects
-            function initProjects() {
-                // Load from localStorage if available
-                const savedProjects = localStorage.getItem('apkProjects');
-                projects = savedProjects ? JSON.parse(savedProjects) : [
+            getDefaultProjects() {
+                return [
                     {
                         id: 1,
                         name: "WhatsApp Plus",
@@ -1394,12 +1448,122 @@
                         image: null
                     }
                 ];
-                
-                renderProjects();
+            }
+            
+            addProject(project) {
+                project.id = Date.now();
+                this.projects.push(project);
+                this.saveProjects();
+                return project;
+            }
+            
+            updateProject(projectId, updatedProject) {
+                const index = this.projects.findIndex(p => p.id === projectId);
+                if (index !== -1) {
+                    this.projects[index] = {...this.projects[index], ...updatedProject};
+                    this.saveProjects();
+                    return true;
+                }
+                return false;
+            }
+            
+            deleteProject(projectId) {
+                const index = this.projects.findIndex(p => p.id === projectId);
+                if (index !== -1) {
+                    this.projects.splice(index, 1);
+                    this.saveProjects();
+                    return true;
+                }
+                return false;
+            }
+            
+            getAllProjects() {
+                return this.projects;
+            }
+            
+            authenticate(password) {
+                return password === this.PASSWORD;
+            }
+        }
+
+        // Main application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize backend
+            const backend = new APKBackend();
+            
+            // Elements
+            const menuBtn = document.getElementById('menuBtn');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const adminPanel = document.getElementById('adminPanel');
+            const loginModal = document.getElementById('loginModal');
+            const adminPassword = document.getElementById('adminPassword');
+            const passwordError = document.getElementById('passwordError');
+            const submitPassword = document.getElementById('submitPassword');
+            const closeLoginModal = document.getElementById('closeLoginModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const addApkBtn = document.getElementById('addApkBtn');
+            const updateApkBtn = document.getElementById('updateApkBtn');
+            const apkGrid = document.getElementById('apkGrid');
+            const projectList = document.getElementById('projectList');
+            const notification = document.getElementById('notification');
+            const apkImage = document.getElementById('apkImage');
+            const imagePreview = document.getElementById('imagePreview');
+            const aboutModal = document.getElementById('aboutModal');
+            const closeAboutModal = document.getElementById('closeAboutModal');
+            const themeBtn = document.getElementById('themeBtn');
+            const searchBtn = document.getElementById('searchBtn');
+            const searchOverlay = document.getElementById('searchOverlay');
+            const closeSearch = document.getElementById('closeSearch');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const downloadModal = document.getElementById('downloadModal');
+            const downloadText = document.getElementById('downloadText');
+            const confirmDownload = document.getElementById('confirmDownload');
+            const cancelDownload = document.getElementById('cancelDownload');
+            const particlesContainer = document.getElementById('particles');
+            
+            // Form elements
+            const apkName = document.getElementById('apkName');
+            const apkLink = document.getElementById('apkLink');
+            const apkDesc = document.getElementById('apkDesc');
+            const apkVersion = document.getElementById('apkVersion');
+            
+            // State variables
+            let currentEditId = null;
+            let currentImage = null;
+            let currentDownloadProject = null;
+            
+            // Create particles for hero section
+            function createParticles() {
+                const particleCount = 20;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Random size
+                    const size = Math.random() * 10 + 3;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Random position
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    // Random animation duration and delay
+                    particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    // Random color
+                    const colors = ['rgba(108, 92, 231, 0.4)', 'rgba(162, 155, 254, 0.4)', 'rgba(255, 118, 117, 0.4)'];
+                    particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    particlesContainer.appendChild(particle);
+                }
             }
             
             // Render projects to the grid
             function renderProjects() {
+                const projects = backend.getAllProjects();
                 apkGrid.innerHTML = '';
                 projectList.innerHTML = '';
                 
@@ -1423,7 +1587,7 @@
                             <div class="apk-badge">${project.version}</div>
                         </div>
                         <div class="apk-content">
-                            <h3>${project.name}</h3>
+                            <h3><i class="fas fa-mobile-alt"></i> ${project.name}</h3>
                             <p>${project.desc}</p>
                             <div class="btn btn-download">
                                 <i class="fas fa-download"></i> Download (${project.size})
@@ -1453,7 +1617,7 @@
                     listItem.innerHTML = `
                         <div>
                             <strong>${project.name}</strong>
-                            <div style="font-size: 0.8rem; color: var(--text-secondary)">${project.version}</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary)">${project.version}</div>
                         </div>
                         <div class="project-actions">
                             <button class="project-btn edit" data-id="${project.id}">
@@ -1490,11 +1654,6 @@
                         btn.addEventListener('click', deleteProjectHandler);
                     });
                 }
-            }
-            
-            // Save projects to localStorage
-            function saveProjects() {
-                localStorage.setItem('apkProjects', JSON.stringify(projects));
             }
             
             // Toggle menu
@@ -1566,7 +1725,7 @@
             
             // Submit password
             submitPassword.addEventListener('click', function() {
-                if (adminPassword.value === SECRET_KEY) {
+                if (backend.authenticate(adminPassword.value)) {
                     // Correct password
                     loginModal.classList.remove('active');
                     adminPanel.classList.add('show');
@@ -1588,7 +1747,7 @@
                 renderProjects();
             });
             
-            // Handle image upload - FIXED IMAGE PREVIEW
+            // Handle image upload
             apkImage.addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
@@ -1618,21 +1777,19 @@
                 }
                 
                 const newProject = {
-                    id: Date.now(), // Unique ID
                     name: apkName.value,
                     link: apkLink.value,
                     desc: apkDesc.value,
                     version: apkVersion.value,
-                    size: "0 MB", // Default size
+                    size: "0 MB",
                     image: currentImage
                 };
                 
-                projects.push(newProject);
-                saveProjects();
+                backend.addProject(newProject);
                 renderProjects();
                 
                 // Show notification
-                showNotification('APK added successfully!', true);
+                showNotification('APK added successfully! Visible to all users', true);
                 
                 // Clear form
                 resetForm();
@@ -1642,26 +1799,19 @@
             updateApkBtn.addEventListener('click', function() {
                 if (!currentEditId) return;
                 
-                const projectIndex = projects.findIndex(p => p.id === currentEditId);
-                if (projectIndex === -1) return;
-                
-                projects[projectIndex] = {
-                    ...projects[projectIndex],
+                const updatedProject = {
                     name: apkName.value,
                     link: apkLink.value,
                     desc: apkDesc.value,
                     version: apkVersion.value,
-                    image: currentImage || projects[projectIndex].image
+                    image: currentImage
                 };
                 
-                saveProjects();
-                renderProjects();
-                
-                // Show notification
-                showNotification('Project updated successfully!', true);
-                
-                // Reset form
-                resetForm();
+                if (backend.updateProject(currentEditId, updatedProject)) {
+                    renderProjects();
+                    showNotification('Project updated successfully! Visible to all users', true);
+                    resetForm();
+                }
             });
             
             // Edit project handler
@@ -1669,7 +1819,7 @@
                 e.stopPropagation();
                 
                 const projectId = parseInt(e.currentTarget.getAttribute('data-id'));
-                const project = projects.find(p => p.id === projectId);
+                const project = backend.getAllProjects().find(p => p.id === projectId);
                 
                 if (project) {
                     // Populate form
@@ -1715,15 +1865,15 @@
                 
                 const projectId = parseInt(e.currentTarget.getAttribute('data-id'));
                 
-                if (confirm('Are you sure you want to delete this project?')) {
-                    projects = projects.filter(p => p.id !== projectId);
-                    saveProjects();
-                    renderProjects();
-                    showNotification('Project deleted successfully!', true);
-                    
-                    // Reset form if deleting the currently edited project
-                    if (currentEditId === projectId) {
-                        resetForm();
+                if (confirm('Are you sure you want to delete this project? It will be removed for all users.')) {
+                    if (backend.deleteProject(projectId)) {
+                        renderProjects();
+                        showNotification('Project deleted successfully! Removed for all users', true);
+                        
+                        // Reset form if deleting the currently edited project
+                        if (currentEditId === projectId) {
+                            resetForm();
+                        }
                     }
                 }
             }
@@ -1742,14 +1892,14 @@
                 updateApkBtn.style.display = 'none';
             }
             
-            // APK card click handler - FIXED DOWNLOAD FUNCTIONALITY
+            // APK card click handler
             function apkCardClickHandler(e) {
                 // Skip if user clicked on admin buttons
                 if (e.target.closest('.admin-btn')) return;
                 
                 const card = e.currentTarget;
                 const projectId = parseInt(card.getAttribute('data-id'));
-                const project = projects.find(p => p.id === projectId);
+                const project = backend.getAllProjects().find(p => p.id === projectId);
                 
                 if (!project) return;
                 
@@ -1821,6 +1971,7 @@
                 
                 if (term.length === 0) return;
                 
+                const projects = backend.getAllProjects();
                 const filtered = projects.filter(project => 
                     project.name.toLowerCase().includes(term) || 
                     project.desc.toLowerCase().includes(term)
@@ -1837,7 +1988,7 @@
                     resultItem.innerHTML = `
                         <h4>${project.name}</h4>
                         <p>${project.desc}</p>
-                        <div style="margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary)">
+                        <div style="margin-top: 10px; font-size: 0.95rem; color: var(--text-secondary)">
                             Version: ${project.version} | Size: ${project.size}
                         </div>
                     `;
@@ -1857,7 +2008,15 @@
             });
             
             // Initialize the app
-            initProjects();
+            createParticles();
+            renderProjects();
+            
+            // Listen for storage changes to update UI across tabs
+            window.addEventListener('storage', function(e) {
+                if (e.key === backend.STORAGE_KEY) {
+                    renderProjects();
+                }
+            });
         });
     </script>
 </body>
